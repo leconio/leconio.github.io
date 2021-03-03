@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <title>
+      Android的Binder的调用方面 |  lecon
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="/"> <link rel="alternate" href="/atom.xml" title="lecon" type="application/atom+xml">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link rel="icon" href="" />
+    <link
+      href="https://fonts.lug.ustc.edu.cn/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css"
+      rel="stylesheet"
+    />
+    
+<link rel="stylesheet" href="/style.css">
+
+    <script>
+      function setLoadingBarProgress(num) {
+        document.getElementById("loading-bar").style.width = num + "%";
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-131265262-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-131265262-1");
+    </script>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+</html>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				lecon
+			</a>
+
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-about flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;主页
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;博客
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;归档
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' target="_blank" rel="noopener" href='https://x86.leconio.com/'>
+    									<i class='fa fa-telegram fa-'></i>&nbsp;x86
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' target="_blank" rel="noopener" href='https://edit.leconio.com/'>
+    									<i class='fa fa-vimeo fa-'></i>&nbsp;Markdown编辑器
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+        <div class="header">lecon</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-about flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;主页</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;博客</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;归档</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' target="_blank" rel="noopener" href='https://x86.leconio.com/'><i class='fa fa-telegram fa-fw'></i>&nbsp;x86</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' target="_blank" rel="noopener" href='https://edit.leconio.com/'><i class='fa fa-vimeo fa-fw'></i>&nbsp;Markdown编辑器</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-Android的Binder的调用方面" class="post white-box article-type-post" itemscope
+         itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
+            
+                Android的Binder的调用方面
+            
+        </h1>
+        <time>
+            2021-03-03&nbsp;&nbsp;
+            <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/%E9%BB%91%E6%B4%9E/">黑洞</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>Android 的 Binder 的调用方面</p>
+<span id="more"></span>
+
+<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><p>从 Binder 的远程方法调用来看，Proxy 是调用端，Stub 是被调用端。由 AIDL 的 Interface 实现类，可以看出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> java.util.List&lt;com.leconio.aidlsender.Person&gt; getPersons() <span class="keyword">throws</span> android.os.RemoteException &#123;</span><br><span class="line">    android.os.Parcel _data = android.os.Parcel.obtain();</span><br><span class="line">    android.os.Parcel _reply = android.os.Parcel.obtain();</span><br><span class="line">    java.util.List&lt;com.leconio.aidlsender.Person&gt; _result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        _data.writeInterfaceToken(DESCRIPTOR);</span><br><span class="line">        <span class="keyword">boolean</span> _status = mRemote.transact(Stub.TRANSACTION_getPersons, _data, _reply, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (!_status &amp;&amp; getDefaultImpl() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> getDefaultImpl().getPersons();</span><br><span class="line">        &#125;</span><br><span class="line">        _reply.readException();</span><br><span class="line">        _result = _reply.createTypedArrayList(com.leconio.aidlsender.Person.CREATOR);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        _reply.recycle();</span><br><span class="line">        _data.recycle();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先获取两个 Parcel，一个用于传递数据，一个用于接收数据。每个 Parcel 中都有一个<code>mNativePtr</code>，是个 long 类型，其实他是 JNI 中的 Parcel，由 reinterpret_cast 转换而来。也就是说，Java 层的 Parcel 包裹着 JNI 层的 Parcel。Parcel 是在一个 Parcel 池中获取，这个池大小是 6。<br><code>mNativePtr</code> 会在 CPP 代码中 Parcel 初始化的时候被初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> jlong <span class="title">android_os_Parcel_create</span><span class="params">(JNIEnv* env, jclass clazz)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sp&lt;ParcelRef&gt; parcelRef = ParcelRef::create();</span><br><span class="line">    parcelRef-&gt;incStrong(<span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span>*&gt;(android_os_Parcel_create));</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">reinterpret_cast</span>&lt;jlong&gt;(<span class="keyword">static_cast</span>&lt;Parcel *&gt;(parcelRef.get()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中<code>mRemote</code>的实现类是 Java 层的<code>ProxyBinder</code>，这个地方就调用到了 ProxyBinder 中的<code>transact</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">transact</span><span class="params">(<span class="keyword">int</span> code, Parcel data, Parcel reply, <span class="keyword">int</span> flags)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> transactNative(code, data, reply, flags);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        AppOpsManager.resumeNotedAppOpsCollection(prevCollection);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (transactListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">            transactListener.onTransactEnded(session);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tracingEnabled) &#123;</span><br><span class="line">            Trace.traceEnd(Trace.TRACE_TAG_ALWAYS);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用到了 cpp 层的<code>transactNative</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// android_os_BinderProxy</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> jboolean <span class="title">android_os_BinderProxy_transact</span><span class="params">(JNIEnv* env, jobject obj,</span></span></span><br><span class="line"><span class="function"><span class="params">        jint code, jobject dataObj, jobject replyObj, jboolean replyObjOwnsNativeParcel,</span></span></span><br><span class="line"><span class="function"><span class="params">        jint flags)</span> <span class="comment">// throws RemoteException</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    IBinder* target = getBPNativeData(env, obj)-&gt;mObject.get(); <span class="comment">// 获取BPBinder</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">status_t</span> err = target-&gt;transact(code, *data, reply, flags); <span class="comment">// 由BPBinder再次传递</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BpBinder.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">status_t</span> <span class="title">BpBinder::transact</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">uint32_t</span> code, <span class="keyword">const</span> Parcel&amp; data, Parcel* reply, <span class="keyword">uint32_t</span> flags)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">status_t</span> status = IPCThreadState::self()-&gt;transact(</span><br><span class="line">    mHandle, code, data, reply, flags); <span class="comment">// 由IPCThreadState传递给驱动</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有 reply 的话</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BpBinder.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">status_t</span> <span class="title">BpBinder::transact</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">uint32_t</span> code, <span class="keyword">const</span> Parcel&amp; data, Parcel* reply, <span class="keyword">uint32_t</span> flags)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        <span class="keyword">if</span> (reply) &#123;</span><br><span class="line">            err = waitForResponse(reply); <span class="comment">// 等待回复</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Parcel fakeReply;</span><br><span class="line">            err = waitForResponse(&amp;fakeReply);</span><br><span class="line">        &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IPCThreadState.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">status_t</span> <span class="title">IPCThreadState::waitForResponse</span><span class="params">(Parcel *reply, <span class="keyword">status_t</span> *acquireResult)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">uint32_t</span> cmd;</span><br><span class="line">    <span class="keyword">int32_t</span> err;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123; <span class="comment">// 无限循环等待结果</span></span><br><span class="line">        <span class="keyword">if</span> ((err=talkWithDriver()) &lt; NO_ERROR) <span class="keyword">break</span>;</span><br><span class="line">        err = mIn.errorCheck();</span><br><span class="line">        <span class="keyword">if</span> (err &lt; NO_ERROR) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (mIn.dataAvail() == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        cmd = (<span class="keyword">uint32_t</span>)mIn.readInt32();</span><br><span class="line"></span><br><span class="line">        IF_LOG_COMMANDS() &#123;</span><br><span class="line">            alog &lt;&lt; <span class="string">&quot;Processing waitForResponse Command: &quot;</span></span><br><span class="line">                &lt;&lt; getReturnString(cmd) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (cmd) &#123;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">case</span> BR_REPLY: <span class="comment">// 如果返回消息</span></span><br><span class="line">            &#123;</span><br><span class="line">                binder_transaction_data tr;</span><br><span class="line">                err = mIn.read(&amp;tr, <span class="keyword">sizeof</span>(tr));</span><br><span class="line">                ALOG_ASSERT(err == NO_ERROR, <span class="string">&quot;Not enough command data for brREPLY&quot;</span>);</span><br><span class="line">                <span class="keyword">if</span> (err != NO_ERROR) <span class="keyword">goto</span> finish;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (reply) &#123;</span><br><span class="line">                    <span class="keyword">if</span> ((tr.flags &amp; TF_STATUS_CODE) == <span class="number">0</span>) &#123;</span><br><span class="line">                        reply-&gt;ipcSetDataReference(</span><br><span class="line">                            <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">uint8_t</span>*&gt;(tr.data.ptr.buffer),</span><br><span class="line">                            tr.data_size,</span><br><span class="line">                            <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">binder_size_t</span>*&gt;(tr.data.ptr.offsets),</span><br><span class="line">                            tr.offsets_size/<span class="keyword">sizeof</span>(<span class="keyword">binder_size_t</span>),</span><br><span class="line">                            freeBuffer); <span class="comment">// 设置返回值</span></span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        err = *<span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">status_t</span>*&gt;(tr.data.ptr.buffer);</span><br><span class="line">                        freeBuffer(<span class="literal">nullptr</span>,</span><br><span class="line">                            <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">uint8_t</span>*&gt;(tr.data.ptr.buffer),</span><br><span class="line">                            tr.data_size,</span><br><span class="line">                            <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">binder_size_t</span>*&gt;(tr.data.ptr.offsets),</span><br><span class="line">                            tr.offsets_size/<span class="keyword">sizeof</span>(<span class="keyword">binder_size_t</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    freeBuffer(<span class="literal">nullptr</span>,</span><br><span class="line">                        <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">uint8_t</span>*&gt;(tr.data.ptr.buffer),</span><br><span class="line">                        tr.data_size,</span><br><span class="line">                        <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">binder_size_t</span>*&gt;(tr.data.ptr.offsets),</span><br><span class="line">                        tr.offsets_size/<span class="keyword">sizeof</span>(<span class="keyword">binder_size_t</span>));</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">goto</span> finish;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            err = executeCommand(cmd);</span><br><span class="line">            <span class="keyword">if</span> (err != NO_ERROR) <span class="keyword">goto</span> finish;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的 <code>reply</code> 是 Parcel。我们看看<code>Parcel::ipcSetDataReference</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Parcel.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Parcel::ipcSetDataReference</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uint8_t</span>* data, <span class="keyword">size_t</span> dataSize,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="keyword">binder_size_t</span>* objects, <span class="keyword">size_t</span> objectsCount, release_func relFunc)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    freeData();</span><br><span class="line"></span><br><span class="line">    mData = <span class="keyword">const_cast</span>&lt;<span class="keyword">uint8_t</span>*&gt;(data); <span class="comment">// 设置值</span></span><br><span class="line">    mDataSize = mDataCapacity = dataSize;</span><br><span class="line">    mObjects = <span class="keyword">const_cast</span>&lt;<span class="keyword">binder_size_t</span>*&gt;(objects);</span><br><span class="line">    mObjectsSize = mObjectsCapacity = objectsCount;</span><br><span class="line">    mOwner = relFunc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">binder_size_t</span> minOffset = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; mObjectsSize; i++) &#123;</span><br><span class="line">        <span class="keyword">binder_size_t</span> offset = mObjects[i];</span><br><span class="line">        <span class="keyword">if</span> (offset &lt; minOffset) &#123;</span><br><span class="line">            ALOGE(<span class="string">&quot;%s: bad object offset %&quot;</span> PRIu64 <span class="string">&quot; &lt; %&quot;</span> PRIu64 <span class="string">&quot;\n&quot;</span>,</span><br><span class="line">                  __func__, (<span class="keyword">uint64_t</span>)offset, (<span class="keyword">uint64_t</span>)minOffset);</span><br><span class="line">            mObjectsSize = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> flat_binder_object* flat</span><br><span class="line">            = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> flat_binder_object*&gt;(mData + offset);</span><br><span class="line">        <span class="keyword">uint32_t</span> type = flat-&gt;hdr.type;</span><br><span class="line">        <span class="keyword">if</span> (!(type == BINDER_TYPE_BINDER || type == BINDER_TYPE_HANDLE ||</span><br><span class="line">              type == BINDER_TYPE_FD)) &#123;</span><br><span class="line">            <span class="comment">// We should never receive other types (eg BINDER_TYPE_FDA) as long as we don&#x27;t support</span></span><br><span class="line">            <span class="comment">// them in libbinder. If we do receive them, it probably means a kernel bug; try to</span></span><br><span class="line">            <span class="comment">// recover gracefully by clearing out the objects, and releasing the objects we do</span></span><br><span class="line">            <span class="comment">// know about.</span></span><br><span class="line">            android_errorWriteLog(<span class="number">0x534e4554</span>, <span class="string">&quot;135930648&quot;</span>);</span><br><span class="line">            ALOGE(<span class="string">&quot;%s: unsupported type object (%&quot;</span> PRIu32 <span class="string">&quot;) at offset %&quot;</span> PRIu64 <span class="string">&quot;\n&quot;</span>,</span><br><span class="line">                  __func__, type, (<span class="keyword">uint64_t</span>)offset);</span><br><span class="line">            releaseObjects();</span><br><span class="line">            mObjectsSize = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        minOffset = offset + <span class="keyword">sizeof</span>(flat_binder_object);</span><br><span class="line">    &#125;</span><br><span class="line">    scanForFds();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，设置了返回值 mData。</p>
+
+        </div>
+
+        
+            <div class="article-tags tags">
+                
+            </div>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2021/03/03/%E4%BD%BF%E7%94%A8frp%E8%AE%BF%E9%97%AE%E5%85%AC%E5%8F%B8%E5%86%85%E9%83%A8%E7%BD%91%E7%BB%9C/" rel="prev" title="使用frp访问公司内部网络">
+                                    
+                                        使用frp访问公司内部网络
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2020/03/03/Dart%E5%AF%B9%E6%AF%94java%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="prev" title="Dart对比java快速入门">
+                                    
+                                        Dart对比java快速入门
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+
+                
+
+                
+
+                
+
+                
+                    
+                        <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;Gitalk评论</h4>
+                        <section id="comments">
+                            <div id="gitalk-container" class="valine_thread">
+                                </i><i class="fa fa-spinner fa-spin fa-fw"></i>
+                            </div>
+                        </section>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script>
+                            const gitalk = new Gitalk({
+                                clientID: '267678cbabc5bdf16493',
+                                clientSecret: '1b891dc11d681d87a976c666237de5c7b9bc937a',
+                                repo: 'leconio.github.io',
+                                owner: 'leconio',
+                                admin: ['leconio'],
+                                id: decodeURI(window.location.pathname),
+                                distractionFreeMode: false
+                            })
+
+                            gitalk.render('gitalk-container')
+                        </script>
+                    
+                
+
+            
+
+        </section>
+    </article>
+
+
+<script>
+    window.subData = {
+        title: 'Android的Binder的调用方面',
+        tools: true
+    }
+</script>
+<script>
+    gtag('event', 'Android的Binder的调用方面', {'send_to': 'UA-131265262-1'});
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
+                
+            </ul>
+        
+    </div>
+</section>
+
+    
+    
+        
+
+    
+    
+    
+        <section class='m_widget links'>
+    <div class='header'><i class="fa fa-handshake-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;友链</div>
+    <div class='content'>
+        <ul class="entry" id="links">
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://x86.leconio.com/">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-telegram fa-'></i>
+                        &nbsp;&nbsp;Linux模拟器
+                    </div>
+                </a></li>
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://edit.leconio.com/">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-vimeo fa-'></i>
+                        &nbsp;&nbsp;Markdown编辑器
+                    </div>
+                </a></li>
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/leconio">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-github fa-'></i>
+                        &nbsp;&nbsp;GitHub
+                    </div>
+                </a></li>
+            
+            
+
+        </ul>
+
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%83%E7%94%A8"><span class="toc-text">调用</span></a></li></ol>
+        </div>
+    </section>
+
+
+    
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <!-- <div class="social-wrapper">
+            粤ICP备18129541号
+        </div> -->
+    <br>
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+
+
+
+<script src="/js/jquery.fitvids.js"></script>
+
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+    
+    
+    
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>

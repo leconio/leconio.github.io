@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <title>
+      Shadowsocks 实战教程全景实录（2） |  lecon
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="/"> <link rel="alternate" href="/atom.xml" title="lecon" type="application/atom+xml">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link rel="icon" href="" />
+    <link
+      href="https://fonts.lug.ustc.edu.cn/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css"
+      rel="stylesheet"
+    />
+    
+<link rel="stylesheet" href="/style.css">
+
+    <script>
+      function setLoadingBarProgress(num) {
+        document.getElementById("loading-bar").style.width = num + "%";
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-131265262-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-131265262-1");
+    </script>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+</html>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				lecon
+			</a>
+
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-about flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;主页
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;博客
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;归档
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' target="_blank" rel="noopener" href='https://x86.leconio.com/'>
+    									<i class='fa fa-telegram fa-'></i>&nbsp;x86
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' target="_blank" rel="noopener" href='https://edit.leconio.com/'>
+    									<i class='fa fa-vimeo fa-'></i>&nbsp;Markdown编辑器
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+        <div class="header">lecon</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-about flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;主页</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;博客</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;归档</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' target="_blank" rel="noopener" href='https://x86.leconio.com/'><i class='fa fa-telegram fa-fw'></i>&nbsp;x86</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' target="_blank" rel="noopener" href='https://edit.leconio.com/'><i class='fa fa-vimeo fa-fw'></i>&nbsp;Markdown编辑器</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-Shadowsocks 实战教程全景实录（2）" class="post white-box article-type-post" itemscope
+         itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
+            
+                Shadowsocks 实战教程全景实录（2）
+            
+        </h1>
+        <time>
+            2019-06-10&nbsp;&nbsp;
+            <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/%E7%8E%A9%E5%84%BF/">玩儿</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>这次的教程主要分为以下几个部分：</p>
+</blockquote>
+<ol>
+<li>搭建 Shadowsocks-libev 服务端</li>
+<li>配置防火墙</li>
+</ol>
+<span id="more"></span>
+
+<p><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2019/06/17/trrr.png" alt=""></p>
+<p>接着上回说，现在我们 ssh 到搬瓦工服务器。</p>
+<h2 id="检查-bbr"><a href="#检查-bbr" class="headerlink" title="检查 bbr"></a>检查 bbr</h2><p>第一件事儿就是检查有没有开启 bbr 内核，bbr 对于 VPS 的提速上一节已经说过了，非常大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br></pre></td></tr></table></figure>
+
+<p>如果显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_available_congestion_control &#x3D; bbr cubic reno</span><br></pre></td></tr></table></figure>
+
+<p>代表 bbr 已经开启。如果结果中没有 bbr 也不用担心，我在上一篇文章放出了一个安装 bbr 和锐速的脚本，可以直接使用。</p>
+<h2 id="安装-Shadowsocks-服务器"><a href="#安装-Shadowsocks-服务器" class="headerlink" title="安装 Shadowsocks 服务器"></a>安装 Shadowsocks 服务器</h2><p>前段时间秋大的博客宣布告别，这意味着高质量的一键安装脚本越来越少。虽然搬瓦工提供一件安装选项，但可定制化不高，所以我建议大家使用托管在 github 的原始项目，理由是可以保持功能最新，遇到问题也可以通过 issues 而得到迅速解决，<a target="_blank" rel="noopener" href="https://github.com/shadowsocks/shadowsocks-libev">shadowsocks-libev</a>。<br><strong>首先安装依赖项目</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br><span class="line">yum install gcc gettext autoconf libtool automake make pcre-devel asciidoc xmlto c-ares-devel libev-devel libsodium-devel mbedtls-devel -y</span><br></pre></td></tr></table></figure>
+
+<p><code>shadowsocks-libev</code> 托管在 dnf 的 copr 仓库内，默认的 centos7 是不带这个仓库。这里我们安装 dnf 和 copr 仓库。<br><strong>1. 安装 dnf 和 copr 仓库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install dnf</span><br><span class="line">dnf install dnf-plugins-core</span><br><span class="line">dnf install dnf-plugins-copr</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 开启 copr 的<code>shadowsocks-libev</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf copr enable librehat&#x2F;shadowsocks</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 安装 <code>shadowsocks-libev</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dnf update</span><br><span class="line">dnf install shadowsocks-libev</span><br></pre></td></tr></table></figure>
+
+<p>到此为止，如果没有出现什么问题，安装就算完成了，现在执行下面的命令来测试一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss-server -h</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置服务端参数"><a href="#配置服务端参数" class="headerlink" title="配置服务端参数"></a>配置服务端参数</h2><p>上面说到，通过执行 ss-server 可以启动一个 ss 服务器，但是，在实际使用的时候，我们通常设置自己使用的参数，下面的例子是一组最简单的参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss-server -p 8989 -k 123456 -m chacha20 --fast-open</span><br></pre></td></tr></table></figure>
+
+<p>其中-p 是对外开放的端口，-k 是密码，-m 是加密方式，chacha20 是一种非常优秀的加密方式呦，你懂得。–fast-open 开启 TCP 快速打开模式。<br>你可以直接在 VPS 的执行上面的命令，但是这是一个阻塞命令，我们可以使用 nohup 来切换到后台运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ss-server -p 8989 -k 123456 -m chacha20 --fast-open &amp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>看一下我们的 ss-server 是否启动成功</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 通过pid查看ss是否启动</span><br><span class="line">ps -ef|grep ss-server</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 通过端口查看ss是否启动</span><br><span class="line">iptables -xvn -L|grep 8989</span><br></pre></td></tr></table></figure>
+
+<p><strong>别忘了防火墙</strong><br>在上面的参数中，ss 对外开放的端口是 8989。那么我们通过 Centos7 的 firewalld-cmd 防火墙放行这个端口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable firewalld</span><br><span class="line">firewall-cmd --set-default-zone&#x3D;public</span><br><span class="line">firewall-cmd --zone&#x3D;public --permanent --add-service&#x3D;ssh</span><br><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;8989&#x2F;tcp</span><br><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;8989&#x2F;udp</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>上面开启了 ssh 服务使用的端口和 8989 端口，如果你还有需要使用的端口，请参考这篇文章<a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7">How To Set Up a Firewall Using FirewallD on CentOS 7</a><br>好啦！测试一下我们的 8989 通不通吧，在本地电脑 telnet 到 8989</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet [domain name or ip] 8989</span><br></pre></td></tr></table></figure>
+
+<p>空白代表通了。</p>
+<p>（未完待续）<br>下一篇讲述怎么搭建客户端，以及一些小技巧。</p>
+
+        </div>
+
+        
+            <div class="article-tags tags">
+                
+            </div>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2020/03/03/Dart%E5%AF%B9%E6%AF%94java%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="prev" title="Dart对比java快速入门">
+                                    
+                                        Dart对比java快速入门
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/06/08/Shadowsocks%20%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B%E5%85%A8%E6%99%AF%E5%AE%9E%E5%BD%95%EF%BC%881%EF%BC%89/" rel="prev" title="Shadowsocks 实战教程全景实录（1）">
+                                    
+                                        Shadowsocks 实战教程全景实录（1）
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+
+                
+
+                
+
+                
+
+                
+                    
+                        <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;Gitalk评论</h4>
+                        <section id="comments">
+                            <div id="gitalk-container" class="valine_thread">
+                                </i><i class="fa fa-spinner fa-spin fa-fw"></i>
+                            </div>
+                        </section>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script>
+                            const gitalk = new Gitalk({
+                                clientID: '267678cbabc5bdf16493',
+                                clientSecret: '1b891dc11d681d87a976c666237de5c7b9bc937a',
+                                repo: 'leconio.github.io',
+                                owner: 'leconio',
+                                admin: ['leconio'],
+                                id: decodeURI(window.location.pathname),
+                                distractionFreeMode: false
+                            })
+
+                            gitalk.render('gitalk-container')
+                        </script>
+                    
+                
+
+            
+
+        </section>
+    </article>
+
+
+<script>
+    window.subData = {
+        title: 'Shadowsocks 实战教程全景实录（2）',
+        tools: true
+    }
+</script>
+<script>
+    gtag('event', 'Shadowsocks 实战教程全景实录（2）', {'send_to': 'UA-131265262-1'});
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
+                
+            </ul>
+        
+    </div>
+</section>
+
+    
+    
+        
+
+    
+    
+    
+        <section class='m_widget links'>
+    <div class='header'><i class="fa fa-handshake-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;友链</div>
+    <div class='content'>
+        <ul class="entry" id="links">
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://x86.leconio.com/">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-telegram fa-'></i>
+                        &nbsp;&nbsp;Linux模拟器
+                    </div>
+                </a></li>
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://edit.leconio.com/">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-vimeo fa-'></i>
+                        &nbsp;&nbsp;Markdown编辑器
+                    </div>
+                </a></li>
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/leconio">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-github fa-'></i>
+                        &nbsp;&nbsp;GitHub
+                    </div>
+                </a></li>
+            
+            
+
+        </ul>
+
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5-bbr"><span class="toc-text">检查 bbr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Shadowsocks-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">安装 Shadowsocks 服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%82%E6%95%B0"><span class="toc-text">配置服务端参数</span></a></li></ol>
+        </div>
+    </section>
+
+
+    
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <!-- <div class="social-wrapper">
+            粤ICP备18129541号
+        </div> -->
+    <br>
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+
+
+
+<script src="/js/jquery.fitvids.js"></script>
+
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+    
+    
+    
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
