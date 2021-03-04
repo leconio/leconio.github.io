@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
     <title>
-      使用Caddy代理Bitbucket服务器 |  lecon
+      Binder 通信原理图 |  lecon
     </title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,16 +153,16 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
-            <article id="post-使用Caddy代理Bitbucket服务器" class="post white-box article-type-post" itemscope
+            <article id="post-Binder-通信原理图" class="post white-box article-type-post" itemscope
          itemprop="blogPost">
     <section class='meta'>
         <h1 class="title">
             
-                使用Caddy代理Bitbucket服务器
+                Binder 通信原理图
             
         </h1>
         <time>
-            2018-12-21&nbsp;&nbsp;
+            2021-03-04&nbsp;&nbsp;
             <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
         </time>
         
@@ -177,39 +177,15 @@
     <section class="article typo">
 
         <div class="article-entry" itemprop="articleBody">
-            <blockquote>
-<p>在这之前，一直玩 gitlab，gitlab 有一个好的地方就是他的 ci 功能。一个服务器既有了 git 管理又有了持续集成功能。但是 gitlab 安装门槛还算是比较高的，尤其是配置很多自定义的功能呢。贵在开源，随便折腾。</p>
-</blockquote>
+            <p>Binder 通信原理图</p>
 <span id="more"></span>
 
-<h2 id="Bitbucket"><a href="#Bitbucket" class="headerlink" title="Bitbucket"></a>Bitbucket</h2><p>Bitbucket 虽然不是一个免费的版本管理工具，但是本身体验还是很好的，即使付费版本个人使用也很便宜。基于 Java 实现，执行效率当然说的过去。相比于 gitlab 这种需要内存至少 2G 的怪兽，至少是一个选择，而却他不容易宕机，但是他的最大魅力还是配置比较简单。</p>
-<h5 id="下载方式，官网找下载链接，直接-wget"><a href="#下载方式，官网找下载链接，直接-wget" class="headerlink" title="下载方式，官网找下载链接，直接 wget"></a>下载方式，官网找下载链接，直接 wget</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;bitbucket.org&#x2F;product&#x2F;download</span><br></pre></td></tr></table></figure>
-
-<h2 id="Caddy"><a href="#Caddy" class="headerlink" title="Caddy"></a>Caddy</h2><p>使用 Caddy 之前，一直使用 Nginx 作为反向代理服务器，但是 Nginx 配置比较复杂，本身又基于服务模式启动，对于玩家不太友好。Caddy 解决了这些问题，下载好，只需要要执行一个命令就可以启动服务器，全世界都能看到你了。主要是，他可以自动申请 ssl，免去自己申请。</p>
-<h5 id="下载方式："><a href="#下载方式：" class="headerlink" title="下载方式："></a>下载方式：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:&#x2F;&#x2F;getcaddy.com | bash -s personal</span><br></pre></td></tr></table></figure>
-
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>Atlassian 家的软件启动都非常简单。下载好之后，给它一个可执行的权限，然后<code>./</code>他就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x atlassian-bitbucket-5.16.0-x64.bin</span><br><span class="line">.&#x2F;atlassian-bitbucket-5.16.0-x64.bin</span><br></pre></td></tr></table></figure>
-
-<p>这个步骤最好给它 Root 权限。<br>安装完成之后，在<code>/opt</code>下面你可以找到他。到<code>bin</code>目录下，启动它</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;opt&#x2F;atlassian&#x2F;bitbucket&#x2F;5.16.0&#x2F;bin</span><br><span class="line">.&#x2F;start-bitbucket.sh</span><br></pre></td></tr></table></figure>
-
-<p>然后，访问<code>youip:7990</code>。现在大概可以配置这台 git 服务器了。<br>一台电脑只有一个 80 或者 443 端口，不同的服务想使用同一个端口就需要反向代理服务器了。<br>Caddy 需要一个 Caddyfile 文件，可以理解为 Caddy 的描述文件，随便创建一个目录，然后新建这个文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~&#x2F;www</span><br><span class="line">cd ~&#x2F;www</span><br><span class="line">vi Caddyfile</span><br></pre></td></tr></table></figure>
-
-<p>在这个文件中粘贴</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git.lecon.io &#123;</span><br><span class="line">    proxy &#x2F; http:&#x2F;&#x2F;127.0.0.1:7990 &#123;</span><br><span class="line">        header_upstream Host &#123;host&#125;</span><br><span class="line">        header_upstream X-Real-IP &#123;remote&#125;</span><br><span class="line">        header_upstream X-Forwarded-For &#123;remote&#125;</span><br><span class="line">        header_upstream X-Forwarded-Server &#123;host&#125;</span><br><span class="line">        header_upstream X-Forwarded-Proto &#123;scheme&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>意思大概就是说，把客户端的环境信息原封不动的发送给被代理对象。<br>在当前 Caddyfile 目录中执行<code>caddy</code>。输入一下邮箱，现在访问你的网址，可以直接使用了。这个命令会阻塞当前 session，所以最好叫他到后台运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup caddy &amp;</span><br></pre></td></tr></table></figure>
-
-<h2 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h2><p>Caddy 会默认把 http 流量转发到 https 上，给客户端发送一个 302，重定向到 https 网址，这样的话就会出现一个问题，我在打开 Bitbucket 网页，然后请求外部网页，就会发生跨域问题，导致 Webhook 功能不能使用。<br>现在需要配置一下 Bitbucket，找到<code>bitbucket.properties</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find &#x2F;|grep bitbucket.properties</span><br></pre></td></tr></table></figure>
-
-<p>然后加入下面内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server.port&#x3D;7990</span><br><span class="line">server.secure&#x3D;true</span><br><span class="line">server.scheme&#x3D;https</span><br><span class="line">server.proxy-port&#x3D;443</span><br><span class="line">server.proxy-name&#x3D;git.lecon.io</span><br></pre></td></tr></table></figure>
-
-<p>重启一下 Bitbucket 服务器，Webhook 等功能可以正常使用。</p>
+<p><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/binder-tong-xin-yuan-li-tu.png" alt="Binder 通信原理图"></p>
+<ol>
+<li>Binder 驱动在内核空间创建一个数据接收缓存区。</li>
+<li>进程在内核空间开辟一个内核缓存区，建立与数据接收缓存区的映射。同时建立数据缓存区与接收进程用户空间地址的映射关系</li>
+<li>发送方调用 copy_from_user() 函数将数据复制到内核缓存区，等于把数据复制到了接收进程</li>
+</ol>
 
         </div>
 
@@ -222,20 +198,20 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2018/12/21/Centos7%E5%A2%9E%E5%8A%A0swap%E5%88%86%E5%8C%BA%E5%A4%A7%E5%B0%8F/" rel="prev" title="Centos7增加swap分区大小">
+                                <a href="/2021/03/04/Gradle%E4%BE%9D%E8%B5%96%E4%B8%AD%E5%85%B3%E4%BA%8EMaven%E5%92%8C%E6%BA%90%E7%A0%81%E4%BE%9D%E8%B5%96%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98/" rel="prev" title="Gradle依赖中关于Maven和源码依赖的一个问题">
                                     
-                                        Centos7增加swap分区大小
+                                        Gradle依赖中关于Maven和源码依赖的一个问题
                                     
                                 </a>
                             </h4>
                             
                         </span>
                     </section>
-                
                 
             </div>
         
@@ -294,12 +270,12 @@
 
 <script>
     window.subData = {
-        title: '使用Caddy代理Bitbucket服务器',
+        title: 'Binder 通信原理图',
         tools: true
     }
 </script>
 <script>
-    gtag('event', '使用Caddy代理Bitbucket服务器', {'send_to': 'UA-131265262-1'});
+    gtag('event', 'Binder 通信原理图', {'send_to': 'UA-131265262-1'});
 </script>
 
 
@@ -362,13 +338,6 @@
     
     
         
-    <section class='m_widget toc-wrapper'>
-        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
-        <div class='content'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bitbucket"><span class="toc-text">Bitbucket</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%AE%98%E7%BD%91%E6%89%BE%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5%EF%BC%8C%E7%9B%B4%E6%8E%A5-wget"><span class="toc-text">下载方式，官网找下载链接，直接 wget</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Caddy"><span class="toc-text">Caddy</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">下载方式：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="toc-text">跨域问题</span></a></li></ol>
-        </div>
-    </section>
-
 
     
 

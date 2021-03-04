@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Binder 通信原理图</title>
+      <link href="2021/03/04/Binder-%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E5%9B%BE/"/>
+      <url>2021/03/04/Binder-%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E5%9B%BE/</url>
+      
+        <content type="html"><![CDATA[<p>Binder 通信原理图</p><span id="more"></span><p><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/binder-tong-xin-yuan-li-tu.png" alt="Binder 通信原理图"></p><ol><li>Binder 驱动在内核空间创建一个数据接收缓存区。</li><li>进程在内核空间开辟一个内核缓存区，建立与数据接收缓存区的映射。同时建立数据缓存区与接收进程用户空间地址的映射关系</li><li>发送方调用 copy_from_user() 函数将数据复制到内核缓存区，等于把数据复制到了接收进程</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 玩儿 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Gradle依赖中关于Maven和源码依赖的一个问题</title>
       <link href="2021/03/04/Gradle%E4%BE%9D%E8%B5%96%E4%B8%AD%E5%85%B3%E4%BA%8EMaven%E5%92%8C%E6%BA%90%E7%A0%81%E4%BE%9D%E8%B5%96%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98/"/>
       <url>2021/03/04/Gradle%E4%BE%9D%E8%B5%96%E4%B8%AD%E5%85%B3%E4%BA%8EMaven%E5%92%8C%E6%BA%90%E7%A0%81%E4%BE%9D%E8%B5%96%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98/</url>
