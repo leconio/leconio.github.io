@@ -177,10 +177,7 @@
     <section class="article typo">
 
         <div class="article-entry" itemprop="articleBody">
-            <p>Android 的 Binder 的调用方面</p>
-<span id="more"></span>
-
-<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><p>从 Binder 的远程方法调用来看，Proxy 是调用端，Stub 是被调用端。由 AIDL 的 Interface 实现类，可以看出：</p>
+            <p>从 Binder 的远程方法调用来看，Proxy 是调用端，Stub 是被调用端。<span id="more"></span> 由 AIDL 的 Interface 实现类，可以看出：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> java.util.List&lt;com.leconio.aidlsender.Person&gt; getPersons() <span class="keyword">throws</span> android.os.RemoteException &#123;</span><br><span class="line">    android.os.Parcel _data = android.os.Parcel.obtain();</span><br><span class="line">    android.os.Parcel _reply = android.os.Parcel.obtain();</span><br><span class="line">    java.util.List&lt;com.leconio.aidlsender.Person&gt; _result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        _data.writeInterfaceToken(DESCRIPTOR);</span><br><span class="line">        <span class="keyword">boolean</span> _status = mRemote.transact(Stub.TRANSACTION_getPersons, _data, _reply, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (!_status &amp;&amp; getDefaultImpl() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> getDefaultImpl().getPersons();</span><br><span class="line">        &#125;</span><br><span class="line">        _reply.readException();</span><br><span class="line">        _result = _reply.createTypedArrayList(com.leconio.aidlsender.Person.CREATOR);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        _reply.recycle();</span><br><span class="line">        _data.recycle();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>先获取两个 Parcel，一个用于传递数据，一个用于接收数据。每个 Parcel 中都有一个<code>mNativePtr</code>，是个 long 类型，其实他是 JNI 中的 Parcel，由 reinterpret_cast 转换而来。也就是说，Java 层的 Parcel 包裹着 JNI 层的 Parcel。Parcel 是在一个 Parcel 池中获取，这个池大小是 6。<br><code>mNativePtr</code> 会在 CPP 代码中 Parcel 初始化的时候被初始化。</p>
@@ -276,6 +273,7 @@
                         </section>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
                         <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
                         <script>
                             const gitalk = new Gitalk({
                                 clientID: '267678cbabc5bdf16493',
@@ -283,7 +281,7 @@
                                 repo: 'leconio.github.io',
                                 owner: 'leconio',
                                 admin: ['leconio'],
-                                id: decodeURI(window.location.pathname),
+                                id: md5(decodeURI(window.location.pathname)),
                                 distractionFreeMode: false
                             })
 
@@ -323,7 +321,13 @@
         
             <ul class="entry">
                 
-                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
                 
                     <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
                 
@@ -362,13 +366,6 @@
     
     
         
-    <section class='m_widget toc-wrapper'>
-        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
-        <div class='content'>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%83%E7%94%A8"><span class="toc-text">调用</span></a></li></ol>
-        </div>
-    </section>
-
 
     
 

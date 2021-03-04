@@ -269,6 +269,7 @@
                         </section>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
                         <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
                         <script>
                             const gitalk = new Gitalk({
                                 clientID: '267678cbabc5bdf16493',
@@ -276,7 +277,7 @@
                                 repo: 'leconio.github.io',
                                 owner: 'leconio',
                                 admin: ['leconio'],
-                                id: decodeURI(window.location.pathname),
+                                id: md5(decodeURI(window.location.pathname)),
                                 distractionFreeMode: false
                             })
 
@@ -316,7 +317,13 @@
         
             <ul class="entry">
                 
-                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
                 
                     <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
                 

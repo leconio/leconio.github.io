@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
     <title>
-      破解公司 Mac 电脑的 jamf 限制，让 Mac 可以共享 Wifi |  lecon
+      Kotlin 封闭类与枚举区别 |  lecon
     </title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,22 +153,22 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
-            <article id="post-破解公司Mac的Wifi共享限制" class="post white-box article-type-post" itemscope
+            <article id="post-Kotlin-封闭类与枚举区别" class="post white-box article-type-post" itemscope
          itemprop="blogPost">
     <section class='meta'>
         <h1 class="title">
             
-                破解公司 Mac 电脑的 jamf 限制，让 Mac 可以共享 Wifi
+                Kotlin 封闭类与枚举区别
             
         </h1>
         <time>
-            2019-06-05&nbsp;&nbsp;
+            2021-03-04&nbsp;&nbsp;
             <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
         </time>
         
     
     <div class='cats'>
-        <a href="/categories/%E7%8E%A9%E5%84%BF/">玩儿</a>
+        <a href="/categories/Android/">Android</a>
     </div>
 
 
@@ -177,33 +177,18 @@
     <section class="article typo">
 
         <div class="article-entry" itemprop="articleBody">
-            <p>一般来说，公司的 Mac 计算机多多少少都会做一些限制，比如说：无法开始 Wifi ，无法使用 iCloud 等等。</p>
+            <p>区别就是一个是静态的一个是动态的…</p>
 <span id="more"></span>
 
-<p>这些功能的限制都是通过 Mac 的 jamf 管理的，破解限制需要 Root 权限。<br>首先我们先找到 jamf 这个可执行文件，他一般在 <code>/usr/local/jamf/</code> 下面。也可以通过 find 命令查找。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">find /usr/<span class="built_in">local</span> |grep jamf</span><br><span class="line"></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/jamf</span><br><span class="line">/usr/<span class="built_in">local</span>/bin/jamfAgent</span><br><span class="line">/usr/<span class="built_in">local</span>/jamf</span><br><span class="line">/usr/<span class="built_in">local</span>/jamf/bin</span><br><span class="line">/usr/<span class="built_in">local</span>/jamf/bin/jamf</span><br></pre></td></tr></table></figure>
+<h1 id="Kotlin-封闭类与枚举区别"><a href="#Kotlin-封闭类与枚举区别" class="headerlink" title="Kotlin 封闭类与枚举区别"></a>Kotlin 封闭类与枚举区别</h1><p>在 Java 或者 Kotlin 中枚举可以携带属性，向下面这样。使用属性可以做一些差异性判断，比如静态工厂。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Car2</span></span>(<span class="keyword">val</span> maxSpeend:<span class="built_in">Int</span>) &#123;</span><br><span class="line">    AUDI(<span class="number">200</span>),BWM(<span class="number">210</span>),BENZ(<span class="number">220</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我的 jamf 可执行文件在 <code>/usr/local/jamf/bin</code> 下面。那么开始破解：</p>
-<p>首先通过执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo jamf removeMDMProfile</span><br></pre></td></tr></table></figure>
+<p>但是在实际开发中，有一些属性并不是直接就能确定的，甚至随着程序的运行才能确定，就用到了封闭类。举个例子：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">class</span> <span class="title">Car3</span></span>(<span class="keyword">val</span> maxSpeed:<span class="built_in">Int</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">object</span> AUDI:Car3(<span class="number">200</span>)</span><br><span class="line">    <span class="keyword">object</span> BWM:Car3(<span class="number">210</span>)</span><br><span class="line">    <span class="keyword">object</span> BENZ:Car3(<span class="number">220</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">CustomCar1</span></span>(<span class="keyword">val</span> m:<span class="built_in">Int</span>) :Car3(DEFAULT_MAX_SPEED)</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">CustomCar2</span></span>(<span class="keyword">val</span> m:<span class="built_in">Int</span>) :Car3(DEFAULT_MAX_SPEED)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">val</span> DEFAULT_MAX_SPEED = <span class="number">200</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">race</span><span class="params">(car:<span class="type">Car3</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span>(car) &#123;</span><br><span class="line">        Car3.AUDI -&gt; println (<span class="string">&quot;AUDI max_speed is &quot;</span> + Car3.AUDI.maxSpeed)</span><br><span class="line">        Car3.BWM -&gt; println(<span class="string">&quot;BWM max_speed is &quot;</span> + Car3.BWM.maxSpeed)</span><br><span class="line">        Car3.BENZ -&gt; println(<span class="string">&quot;BENZ max_speed is &quot;</span> + Car3.BENZ.maxSpeed)</span><br><span class="line">        <span class="keyword">is</span> Car3.CustomCar1 -&gt; println(<span class="string">&quot;CustomCar1 max_speed is &quot;</span> + (car.maxSpeed + car.m))</span><br><span class="line">        <span class="keyword">is</span> Car3.CustomCar2 -&gt; println(<span class="string">&quot;CustomCar2 max_speed is &quot;</span> + (car.maxSpeed + car.m))</span><br><span class="line">        <span class="keyword">else</span> -&gt; Car3.DEFAULT_MAX_SPEED</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    race(Car3.AUDI)</span><br><span class="line">    race(Car3.BENZ)</span><br><span class="line">    race(Car3.CustomCar1(<span class="number">30</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>移除 jamf 的限制，这时候受限制的功能就可以使用了。但是，过一段时间之后你会发现又恢复原来的状态了。那么应该怎么解决呢？<br>我们做一个伪装的 jamf 吧！这时候系统调用 <code>jamf</code> 的时候，就会调用我们伪装的文件，不让我们的破解失效。</p>
-<ol>
-<li>首先备份原始文件，这里要把整个 bin 目录备份。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/jamf</span><br><span class="line">mkdir backup</span><br><span class="line">mv bin backup</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>新建一个伪装 jamf 的纯文本文档，输入以下信息</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">echo &#39;dummy&#39; &gt; &#x2F;dev&#x2F;null</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>替换原有的 jamf</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;usr&#x2F;local&#x2F;jamf&#x2F;bin&#x2F;</span><br><span class="line">sudo mv jamf &#x2F;usr&#x2F;local&#x2F;jamf&#x2F;bin&#x2F;</span><br><span class="line">chmod +x &#x2F;usr&#x2F;local&#x2F;jamf&#x2F;bin&#x2F;jamf</span><br></pre></td></tr></table></figure>
-
-<p>然后重启你的 Mac ，大功告成！</p>
+<p>在上面代码中，封闭类 Car3 中<code>AUDI BWM BENZ</code>的最大速度已经确定，直接写死在代码中。但是有一些数据是从数据库读取或者用户人为输入的，比如上面的 <code>CustomCar1</code>，他的最大速度可以使用构造器传入，在上面的<code>main</code>函数中。</p>
+<p>在实际开发中，封闭类可以看做枚举类的一个拓展，这也是我用封闭类最多的地方。比如说放到回调接口中：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">class</span> <span class="title">Result</span>&lt;<span class="type">out R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Success</span>&lt;<span class="type">out T</span>&gt;</span>(<span class="keyword">val</span> <span class="keyword">data</span>: T) : Result&lt;T&gt;()</span><br><span class="line">    <span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Error</span></span>(<span class="keyword">val</span> exception: Exception) : Result&lt;<span class="built_in">Nothing</span>&gt;()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -220,9 +205,9 @@
                         <span class="art-item-left">
                             <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
                             <h4>
-                                <a href="/2019/06/10/%E5%BC%80%E5%90%AFBBR%E6%90%AD%E5%BB%BAss-server/" rel="prev" title="开启BBR搭建ss-server">
+                                <a href="/2021/03/04/Android-%E8%AE%BE%E5%A4%87%E9%80%9A%E8%BF%87WIFI%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE-%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BC%A0%E8%BE%93/" rel="prev" title="Android 设备通过WIFI传输数据 - 点对点传输">
                                     
-                                        开启BBR搭建ss-server
+                                        Android 设备通过WIFI传输数据 - 点对点传输
                                     
                                 </a>
                             </h4>
@@ -235,9 +220,9 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2018/12/21/Centos7%E5%A2%9E%E5%8A%A0swap%E5%88%86%E5%8C%BA%E5%A4%A7%E5%B0%8F/" rel="prev" title="Centos7增加swap分区大小">
+                                <a href="/2021/03/04/%E6%8B%86%E5%8C%85%E6%9B%BF%E6%8D%A2%E6%96%87%E4%BB%B6/" rel="prev" title="apk 拆包替换文件">
                                     
-                                        Centos7增加swap分区大小
+                                        apk 拆包替换文件
                                     
                                 </a>
                             </h4>
@@ -302,12 +287,12 @@
 
 <script>
     window.subData = {
-        title: '破解公司 Mac 电脑的 jamf 限制，让 Mac 可以共享 Wifi',
+        title: 'Kotlin 封闭类与枚举区别',
         tools: true
     }
 </script>
 <script>
-    gtag('event', '破解公司 Mac 电脑的 jamf 限制，让 Mac 可以共享 Wifi', {'send_to': 'UA-131265262-1'});
+    gtag('event', 'Kotlin 封闭类与枚举区别', {'send_to': 'UA-131265262-1'});
 </script>
 
 
@@ -370,6 +355,13 @@
     
     
         
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kotlin-%E5%B0%81%E9%97%AD%E7%B1%BB%E4%B8%8E%E6%9E%9A%E4%B8%BE%E5%8C%BA%E5%88%AB"><span class="toc-text">Kotlin 封闭类与枚举区别</span></a></li></ol>
+        </div>
+    </section>
+
 
     
 

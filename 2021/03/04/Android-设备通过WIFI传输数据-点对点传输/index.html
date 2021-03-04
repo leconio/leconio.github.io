@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <title>
+      Android 设备通过WIFI传输数据 - 点对点传输 |  lecon
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="/"> <link rel="alternate" href="/atom.xml" title="lecon" type="application/atom+xml">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link rel="icon" href="" />
+    <link
+      href="https://fonts.lug.ustc.edu.cn/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css"
+      rel="stylesheet"
+    />
+    
+<link rel="stylesheet" href="/style.css">
+
+    <script>
+      function setLoadingBarProgress(num) {
+        document.getElementById("loading-bar").style.width = num + "%";
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-131265262-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-131265262-1");
+    </script>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+</html>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				lecon
+			</a>
+
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-about flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;主页
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;博客
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;归档
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+        <div class="header">lecon</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-about flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;主页</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;博客</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;归档</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-Android-设备通过WIFI传输数据-点对点传输" class="post white-box article-type-post" itemscope
+         itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
+            
+                Android 设备通过WIFI传输数据 - 点对点传输
+            
+        </h1>
+        <time>
+            2021-03-04&nbsp;&nbsp;
+            <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/Android/">Android</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>点对点传输（P2P）又是 WLAN 直连，他可以在没有中间接入点的情况下，通过 WLAN 进行直接互联。<span id="more"></span>他有用户介入操作少，比蓝牙传输速度高等特点，对设备的要求仅仅为 14，同时他又不占用 wlan0 网卡。</p>
+<p>WLAN P2P 需要使用到 WifiP2pManager ，同时需要以下权限，这里面有一些是运行时权限，需要用户同意后才能使用。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-sdk</span> <span class="attr">android:minSdkVersion</span>=<span class="string">&quot;14&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_WIFI_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.CHANGE_WIFI_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.CHANGE_NETWORK_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.INTERNET&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>点对点传输（P2P）至少有两个有 Wifi 的设备，其中一个是 Android，首先确定 Android 设备和另外一个设备是否支持 P2P 连接。把手机连接电脑运行 <code>adb shell ip addr|grep p2p0 -A2</code>有输出就带边可以使用，一般来说都可以使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">29</span>: p2p0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu <span class="number">1500</span> qdisc mq state DOWN group <span class="keyword">default</span> qlen <span class="number">1000</span></span><br><span class="line">    link/ether <span class="number">02</span>:<span class="number">00</span>:<span class="number">2d</span>:<span class="number">63</span>:a5:6b brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure>
+
+<p>注意看上面的输出，<code>link/ether 02:00:2d:63:a5:6</code> 为 p2p 的 Mac 地址，不同的设备之间使用 Mac 地址连接，所以首先要知道 P2P（p2p0）的 Mac 地址，这个和 wifi（wlan0）的地址不是同一个，在代码中需要使用下面方法获取。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getLocalMacAddress</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        List&lt;NetworkInterface&gt; interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());</span><br><span class="line">        <span class="keyword">for</span> (NetworkInterface ntwInterface : interfaces) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (ntwInterface.getName().equalsIgnoreCase(<span class="string">&quot;p2p0&quot;</span>)) &#123;</span><br><span class="line">                <span class="keyword">byte</span>[] byteMac = ntwInterface.getHardwareAddress();</span><br><span class="line">                <span class="keyword">if</span> (byteMac == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                StringBuilder strBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; byteMac.length; i++) &#123;</span><br><span class="line">                    strBuilder.append(String.format(<span class="string">&quot;%02X:&quot;</span>, byteMac[i]));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (strBuilder.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    strBuilder.deleteCharAt(strBuilder.length() - <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> strBuilder.toString();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        Log.d(<span class="string">&quot;Lecon&quot;</span>, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来看一下如何主动连接到 p2p 设备。</p>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>首先通过 WifiP2pManager 的 initialize 初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val manager: WifiP2pManager? <span class="function">by <span class="title">lazy</span><span class="params">(LazyThreadSafetyMode.NONE)</span> </span>&#123;</span><br><span class="line">    getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">override fun <span class="title">onCreate</span><span class="params">(savedInstanceState: Bundle?)</span> </span>&#123;</span><br><span class="line">    mChannel = manager?.initialize(<span class="keyword">this</span>, mainLooper, <span class="keyword">null</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时使用广播来接受各种 P2P 连接的状态变化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mChannel: WifiP2pManager.Channel? = <span class="keyword">null</span></span><br><span class="line"><span class="keyword">var</span> mReceiver: WiFiDirectBroadcastReceiver? = <span class="keyword">null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> val mWifiP2pManager: <span class="function">WifiP2pManager by <span class="title">lazy</span><span class="params">(LazyThreadSafetyMode.NONE)</span> </span>&#123;</span><br><span class="line">    getSystemService(Context.WIFI_P2P_SERVICE) as WifiP2pManager</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> val mIntentFilter: <span class="function">IntentFilter by <span class="title">lazy</span><span class="params">(LazyThreadSafetyMode.NONE)</span> </span>&#123;</span><br><span class="line">    IntentFilter().apply &#123;</span><br><span class="line">        addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION)</span><br><span class="line">        addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION)</span><br><span class="line">        addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION)</span><br><span class="line">        addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">override fun <span class="title">onCreate</span><span class="params">(savedInstanceState: Bundle?)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    mChannel = mWifiP2pManager.initialize(<span class="keyword">this</span>, mainLooper, <span class="keyword">null</span>)</span><br><span class="line">    mReceiver = WiFiDirectBroadcastReceiver(mWifiP2pManager, mChannel, <span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WiFiDirectBroadcastReceiver</span>(</span></span><br><span class="line">        private val mManager: WifiP2pManager?,</span><br><span class="line">        <span class="keyword">private</span> val mChannel: WifiP2pManager.Channel?,</span><br><span class="line">        <span class="keyword">private</span> val mActivity: MainActivity</span><br><span class="line">) : BroadcastReceiver() &#123;</span><br><span class="line">		<span class="function">override fun <span class="title">onReceive</span><span class="params">(context: Context, intent: Intent)</span> </span>&#123;</span><br><span class="line">		    val action = intent.action</span><br><span class="line">		    <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION == action) &#123;</span><br><span class="line">				<span class="comment">// 当 WLAN P2P 在设备上启用或停用时广播</span></span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION == action) &#123;</span><br><span class="line">				<span class="comment">// 调用 requestPeers() 方法，以获得当前所发现对等设备的列表。</span></span><br><span class="line">				<span class="comment">// 同时 在这里调用 connect 方法连接对方机器</span></span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION == action) &#123;</span><br><span class="line">				<span class="comment">// 当设备的 WLAN 连接状态更改时广播。</span></span><br><span class="line">				<span class="comment">// 连接对方机器成功或者失败都会在这里回调</span></span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION == action) &#123;</span><br><span class="line">				<span class="comment">// 当设备的详细信息（例如设备名称）更改时广播</span></span><br><span class="line">				&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上边哪一些代码可以当成主动发起<strong>扫描之后的回调</strong>，使用广播进行回调说起来真的是挺复杂的，但是仔细想想，操作硬件设备本来就是跨进程的，而且这个还是长时间耗时操作，系统通过广播回调也是合理的。</p>
+<p>到现在位置，可以把以上代码运行到 Android 上，他就可以最为 P2P 连接的被连接端。</p>
+<h2 id="连接到设备"><a href="#连接到设备" class="headerlink" title="连接到设备"></a>连接到设备</h2><p>连接到设备的时候，首先要确定对方设备的 mac 地址，上面的两种方法是针对于 Android 设备的。一种是 adb 方式，一种是代码获取。</p>
+<p>接下来要发现设备：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mWifiP2pManager.discoverPeers(mChannel, object : WifiP2pManager.ActionListener &#123;</span><br><span class="line">    <span class="function">override fun <span class="title">onSuccess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span><span class="meta">@MainActivity</span>, <span class="string">&quot;已发现设备，准备连接&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">override fun <span class="title">onFailure</span><span class="params">(reasonCode: Int)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>返现设备之后，通过广播回调的 WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION 事件获取设备列表。找到列表中的设备与被连接设备 mac 地址一致的，确保我们被连接机器已经就绪。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mManager?.requestPeers(mChannel) &#123; peers -&gt;</span><br><span class="line">    <span class="keyword">for</span> (device in peers.deviceList) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mac != <span class="keyword">null</span> &amp;&amp; mac.equals(device.deviceAddress, ignoreCase = <span class="keyword">true</span>)) &#123;</span><br><span class="line">            connectToDevice(device)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以连接设备了！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">val config = WifiP2pConfig()</span><br><span class="line">config.deviceAddress = <span class="string">&quot;被连接设备的Mac地址&quot;</span></span><br><span class="line">mManager?.connect(mChannel, config, object : WifiP2pManager.ActionListener &#123;</span><br><span class="line">    <span class="function">override fun <span class="title">onSuccess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Toast.makeText(mActivity, <span class="string">&quot;连接成功&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">override fun <span class="title">onFailure</span><span class="params">(reason: Int)</span> </span>&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果被连接设备是 Android，你应该能看到一个连接提示，点击接受这样两台设备之间就连接成功了，通过 WIFI 两个设备可以实现近场通讯。</p>
+<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><p>通信之前需要知道被连接设备的 ip 地址。如果是 android 设备，在被连接设备执行<code>adb shell ip addr|grep p2p0 -A4</code> 就可以看到，这也是检测是否连接成功的方法。代码获取仍然要获取 p2p0 网卡的，wlan0 获取的 ip 地址不能用于这里。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getLocalIp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        List&lt;NetworkInterface&gt; interfaces = Collections</span><br><span class="line">                .list(NetworkInterface.getNetworkInterfaces());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (NetworkInterface intf : interfaces) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!intf.getName().contains(<span class="string">&quot;p2p0&quot;</span>))</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            List&lt;InetAddress&gt; addrs = Collections.list(intf</span><br><span class="line">                    .getInetAddresses());</span><br><span class="line">            <span class="keyword">for</span> (InetAddress addr : addrs) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!addr.isLoopbackAddress()) &#123;</span><br><span class="line">                    <span class="keyword">return</span> addr.getHostAddress().toUpperCase();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">        ex.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果被连接设备是一台服务器（在 Android 里面搭建一台服务器也是可以的），在这台设备上可以用 okhttp 等框架进行网络访问，或者使用 socket 进行传输。<br>现在两个手机（P2P）设备之间就可以同过 WLAN 直接通信了。</p>
+<p>下面是源代码：<a target="_blank" rel="noopener" href="https://github.com/leconio/WifiDircetP2PDemo">https://github.com/leconio/WifiDircetP2PDemo</a></p>
+
+        </div>
+
+        
+            <div class="article-tags tags">
+                
+            </div>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2021/03/04/React-Native-%E6%8B%86%E5%8C%85%E6%80%9D%E6%83%B3/" rel="prev" title="React Native 拆包总结">
+                                    
+                                        React Native 拆包总结
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2021/03/04/Kotlin-%E5%B0%81%E9%97%AD%E7%B1%BB%E4%B8%8E%E6%9E%9A%E4%B8%BE%E5%8C%BA%E5%88%AB/" rel="prev" title="Kotlin 封闭类与枚举区别">
+                                    
+                                        Kotlin 封闭类与枚举区别
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+
+                
+
+                
+
+                
+
+                
+                    
+                        <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;Gitalk评论</h4>
+                        <section id="comments">
+                            <div id="gitalk-container" class="valine_thread">
+                                </i><i class="fa fa-spinner fa-spin fa-fw"></i>
+                            </div>
+                        </section>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
+                        <script>
+                            const gitalk = new Gitalk({
+                                clientID: '267678cbabc5bdf16493',
+                                clientSecret: '1b891dc11d681d87a976c666237de5c7b9bc937a',
+                                repo: 'leconio.github.io',
+                                owner: 'leconio',
+                                admin: ['leconio'],
+                                id: md5(decodeURI(window.location.pathname)),
+                                distractionFreeMode: false
+                            })
+
+                            gitalk.render('gitalk-container')
+                        </script>
+                    
+                
+
+            
+
+        </section>
+    </article>
+
+
+<script>
+    window.subData = {
+        title: 'Android 设备通过WIFI传输数据 - 点对点传输',
+        tools: true
+    }
+</script>
+<script>
+    gtag('event', 'Android 设备通过WIFI传输数据 - 点对点传输', {'send_to': 'UA-131265262-1'});
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
+                
+            </ul>
+        
+    </div>
+</section>
+
+    
+    
+        
+
+    
+    
+    
+        <section class='m_widget links'>
+    <div class='header'><i class="fa fa-handshake-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;友链</div>
+    <div class='content'>
+        <ul class="entry" id="links">
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/leconio">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-github fa-'></i>
+                        &nbsp;&nbsp;GitHub
+                    </div>
+                </a></li>
+            
+            
+
+        </ul>
+
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%88%B0%E8%AE%BE%E5%A4%87"><span class="toc-text">连接到设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1"><span class="toc-text">通信</span></a></li></ol></li></ol>
+        </div>
+    </section>
+
+
+    
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <!-- <div class="social-wrapper">
+            粤ICP备18129541号
+        </div> -->
+    <br>
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+
+
+
+<script src="/js/jquery.fitvids.js"></script>
+
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+    
+    
+    
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>

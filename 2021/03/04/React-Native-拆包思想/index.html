@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <title>
+      React Native 拆包总结 |  lecon
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="/"> <link rel="alternate" href="/atom.xml" title="lecon" type="application/atom+xml">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link rel="icon" href="" />
+    <link
+      href="https://fonts.lug.ustc.edu.cn/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css"
+      rel="stylesheet"
+    />
+    
+<link rel="stylesheet" href="/style.css">
+
+    <script>
+      function setLoadingBarProgress(num) {
+        document.getElementById("loading-bar").style.width = num + "%";
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-131265262-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-131265262-1");
+    </script>
+  <meta name="generator" content="Hexo 5.4.0"></head>
+</html>
+
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				<!-- <i class="fa fa-home"></i> -->
+				lecon
+			</a>
+
+				<div class='menu'>
+					<ul class='h-list'>
+                        
+    						
+    							<li>
+    								<a class='nav-about flat-box' href='/'>
+    									<i class='fa fa-home fa-'></i>&nbsp;主页
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-home flat-box' href='/'>
+    									<i class='fa fa-rss fa-'></i>&nbsp;博客
+    								</a>
+    							</li>
+    						
+    							<li>
+    								<a class='nav-archives flat-box' href='/archives'>
+    									<i class='fa fa-archive fa-'></i>&nbsp;归档
+    								</a>
+    							</li>
+    						
+        			 
+					</ul>
+					<div class='underline'></div>
+				</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon"><i class="fa fa-search fa-fw"></i></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fa fa-search fa-fw" href='javascript:void(0)'></span></a></li>
+				
+				<li class='s-menu'><a class="fa fa-navicon fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				xaoxuu
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="fa fa-comments fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-top'><a class="fa fa-arrow-up fa-fw flat-box" href='javascript:void(0)'></a></li>
+				<li class='s-toc'><a class="fa fa-list-ul fa-fw flat-box" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+        <div class="header">lecon</div>
+		<nav>
+            <ul>
+                
+                    
+                        <li>
+                            <a class='nav-about flat-box nav flat-box' href='/'><i class='fa fa-home fa-fw'></i>&nbsp;主页</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-home flat-box nav flat-box' href='/'><i class='fa fa-rss fa-fw'></i>&nbsp;博客</a>
+                        </li>
+                    
+                        <li>
+                            <a class='nav-archives flat-box nav flat-box' href='/archives'><i class='fa fa-archive fa-fw'></i>&nbsp;归档</a>
+                        </li>
+                    
+             
+            </ul>
+		</nav>
+	</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-React-Native-拆包思想" class="post white-box article-type-post" itemscope
+         itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
+            
+                React Native 拆包总结
+            
+        </h1>
+        <time>
+            2021-03-04&nbsp;&nbsp;
+            <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/ReactNative/">ReactNative</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>在这里使用 Metro 的方式进行拆包，拆包的目的是可以按业务需要进行按需加载，同时可以热更新和热修复。<span id="more"></span></p>
+<p>分包思路为：**基础包+业务包 1+业务包 2+…**。<br><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/untitled.png" alt="Untitled"></p>
+<p>由上面可以看到，app 有原来的一个 bundle 分拆为多个，在 app 启动的时候，先加载公共部分 bundle，启动之后按需加载业务 bundle。每个 bundle 都对应一个容器，在 android 里面是 Activity，而在 iOS 里面是 ViewController。那么就可以理解为把之前单容器 bundle 的 app，拆分为多个容器加载。</p>
+<h3 id="规划代码拆分"><a href="#规划代码拆分" class="headerlink" title="规划代码拆分"></a>规划代码拆分</h3><p>在进行 bundle 拆分之前，我们要制定好方案：</p>
+<p>首先我们的代码一般分为：<strong>主要代码+依赖+工具+资源</strong></p>
+<p>举个例子，如下图：<br><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/untitled-1.png" alt="Untitled 1"></p>
+<p>红色框框里面的是<strong>工具代码</strong>，在打 bundle 的时候我们把他们排除，不打入 bundle 中。</p>
+<p>白色框框里面的是<strong>依赖代码</strong>，我们选择性打入。</p>
+<p>绿色框框里面的是<strong>主要代码</strong>，我们需要把他们打入到 bundle 中。</p>
+<p><em>资源比较特殊，下面在进行讨论</em></p>
+<p>在上面我们把 bundle 分为<strong>公共 bundle</strong>和<strong>业务 bundle</strong>，在分包的时候也是把代码分成上面三个部分，然后装配到不同的 bundle 中的。如下图所示：<br><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/untitled-2.png" alt="Untitled 2"><br>从上图可以看出，公共 bundle 与业务 bundle 唯一的区别就是多了依赖代码。这么分包的好处是：</p>
+<ol>
+<li>公共 bundle 可以做成没有 ui 页面的组件，然后异步加载。在进入业务页面的时候会非常快。</li>
+<li>抽离业务模块的依赖部分，打出来的 bundle 会非常小，单独更新 bundle 时候，冗余量非常小。</li>
+</ol>
+<p>但是也有一些缺点，你是需要知道的：</p>
+<ol>
+<li>业务 bundle 也需要<code>node_module</code>依赖，在所有 bundle 中，如果 <code>package.json</code> 依赖版本不统一，有可能会引发白屏问题。</li>
+</ol>
+<blockquote>
+<p>分包方案这部分要具体问题具体分析，解决痛点才是重要的。</p>
+</blockquote>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><p>为了演示 demo，我们准备两个工程，一个主 bundle，一个业务 bundle。先来对比看一下这两个项目的目录结构。<br><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/untitled-3.png" alt="Untitled 3"><br>为了方便，我把原生工程（iOS 和 Android）放到公共 bundle 下面，在实际情况中，一般都会新增仓库，由不同的项目组分管。</p>
+<p>在这里公共 bundle 仓库中，没有自有代码实现（没有 src 目录），因为 demo 的逻辑没有那么复杂，大家可以具体问题具体分析，放一些一些公共初始化的东西，如推送处理，后台服务等等。</p>
+<p>注意：react native 在打包的过程中，如果一个依赖没有被使用到，即使你再 package.json 中声明了它，它也是不会被打包到 bundle 中的，所以为了把公共依赖都打到公共 bundle 中，我们需要在入口文件<code>index.js</code>中声明用到的依赖。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;react-native&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;react-native-gesture-handler&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;react-navigation&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;react-navigation-redux-helpers&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;redux-thunk&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;react-native-screens&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>小提示：如果在运行过成功发生白屏现象，检查依赖代码（node_modules）是否被打入到公共 bundle 中，如果没有，就要主动声明它们。</p>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>现在假设你已经指定了自己的分包方案，那么看一下 React Native 是如何生产 bundle 的，又是如何分包的。</p>
+<p>React Native 打包命令为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node ./node_modules/react-native/local-cli/cli.js bundle</span><br><span class="line">	--platform android</span><br><span class="line">	--dev <span class="literal">false</span></span><br><span class="line">	--entry-file index.js</span><br><span class="line">	--bundle-output ./bundles/base.android.bundle</span><br><span class="line">	--assets-dest ./bundles/res/android</span><br><span class="line">	--config ./package.config.js</span><br><span class="line">	--sourcemap-output  ./bundles/base.android.bundle.map</span><br><span class="line">	--reset-cache</span><br></pre></td></tr></table></figure>
+
+<p><code>--platform android</code> 指定运行平台，ios 平台则指定为 ios。</p>
+<p><code>--dev false</code> 指定为 release 版本。</p>
+<p><code>--entry-file</code> 指定入口文件，程序的主入口。</p>
+<p><code>--bundle-output</code> <code>--assets-dest</code> <code>--sourcemap-output</code> 分别为 bundle 输出路径，资源输出路径，debug 用到的映射文件输出路径，以上三个路径必须存在。</p>
+<p><code>--config</code> 在这里传入分包方案用到的 js 文件。</p>
+<p>资源文件推荐直接输出到目的目录中，如果是 android 平台，输出到<code>src/main/res/</code>中</p>
+<h3 id="分包"><a href="#分包" class="headerlink" title="分包"></a>分包</h3><p>由上面可以知道，分包的重点就是 <code>package.config.js</code> 这个文件了。在这里可以把源码 clone 下来，打开 base 工程下的这个文件：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  serializer: &#123;</span><br><span class="line">    createModuleIdFactory: createModuleIdFactory,</span><br><span class="line">    processModuleFilter: postProcessModulesFilter,</span><br><span class="line">    <span class="comment">/* serializer options */</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，有两个很重要的方法<code>createModuleIdFactory</code> 和 <code>postProcessModulesFilter</code> 。<code>createModuleIdFactory</code> 是给每一个需要打包的文件去一个名字，避免多个 bundle 文件中代码冲突。而<code>postProcessModulesFilter</code> 就是用于标记哪些文件需要打入到 bundle 中的了。这个方法返回 false 表示不打入，true 表示打入。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Base工程中 打包关键代码</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>[<span class="string">&quot;path&quot;</span>].indexOf(pathSep + <span class="string">&quot;node_modules&quot;</span> + pathSep) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>[<span class="string">&quot;path&quot;</span>].indexOf(<span class="string">&quot;index&quot;</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在公共依赖 base 工程，我们只打入路径中包含<strong>node_modules</strong>和<strong>入口文件</strong>。而在业务工程只打入<strong>主要代码</strong>和<strong>入口文件</strong>。如下所示：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 业务工程中 打包关键代码</span></span><br><span class="line"><span class="comment">// 提前过滤依赖</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>[<span class="string">&quot;path&quot;</span>].indexOf(pathSep + <span class="string">&quot;node_modules&quot;</span> + pathSep) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>[<span class="string">&quot;path&quot;</span>].indexOf(pathSep + <span class="string">&quot;src&quot;</span> + pathSep) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>[<span class="string">&quot;path&quot;</span>].indexOf(<span class="string">&quot;index&quot;</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，两个 bundle 和资源文件就生成了。</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>这时候，分包的主要工作已经完成，把打包的产物放到远程工程里面已经可以正常运行。但是工作远远没有结束。首先这两个 bundle 没有任何版本信息，也无法判断时候被伪装。</p>
+<p>我们的 bundle 应该做到热替换，如果只在服务器上拉取最新的 bundle，那么就无法保证分区域加载，或者灰度加载。所以我们还需要一个配置文件，用于记录这个 bundle 的日期、版本、灰度区域以及他的 md5 信息。</p>
+<p>这个配置文件为 bundle 打完包之后就要生成，同时可以被中台（原生工程读取）。为了方便，我们使用 json 作为文件结构格式。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;create_date&quot;</span>:<span class="number">1595317939331</span>,</span><br><span class="line">  <span class="string">&quot;version&quot;</span>:<span class="string">&quot;1.0.1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;update_desc&quot;</span>:<span class="string">&quot;新加了一个弹框&quot;</span>,</span><br><span class="line">  <span class="string">&quot;md5&quot;</span>:<span class="string">&quot;0ca175b9c0f726a831d895e269332461&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先 create_date 就代表这个 config 配置生成时间， version 是当前 bundle 版本号，md5 为打包 bundle 的唯一标识。这个配置文件可以使用脚本生成。</p>
+<p>在 package.json 里面新增一个 postxxx ,其中 xxx 为你的打包命令。我使用的是 make，那么就新增 postmake，这样，在执行完成打包命令之后，他会自动执行。如下图</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;make&quot;</span>: <span class="string">&quot;node ./node_modules/react-native/local-cli/cli.js bundle --platform android --dev false --entry-file index.js --bundle-output ./bundles/base.android.bundle --assets-dest ./bundles/res/android --config ./package.config.js --sourcemap-output  ./bundles/base.android.bundle.map --reset-cache&quot;</span>,</span><br><span class="line">    <span class="string">&quot;makeiOS&quot;</span>: <span class="string">&quot;node ./node_modules/react-native/local-cli/cli.js bundle --platform ios --dev false --entry-file index.js --bundle-output ./bundles/base.ios.bundle --assets-dest ./bundles/res/ios --config ./package.config.js --sourcemap-output  ./bundles/base.ios.bundle.map --reset-cache&quot;</span>,</span><br><span class="line">    <span class="string">&quot;postmake&quot;</span>:<span class="string">&quot;node aftermake.js&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>那么这里的<code>aftermake.js</code> ，主要工作就是生成配置文件了，并且把它打包成最终文件。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">&quot;crypto&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> compressing = <span class="built_in">require</span>(<span class="string">&quot;compressing&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateMd5</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, rejects</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> stream = fs.createReadStream(<span class="string">&quot;bundles/base.android.bundle&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> fsHash = crypto.createHash(<span class="string">&quot;md5&quot;</span>);</span><br><span class="line"></span><br><span class="line">    stream.on(<span class="string">&quot;data&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">      fsHash.update(d);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    stream.on(<span class="string">&quot;end&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> md5 = fsHash.digest(<span class="string">&quot;hex&quot;</span>);</span><br><span class="line">      resolve(md5);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">readPackageInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, rejects</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(<span class="string">&quot;package.json&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        rejects(err);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">var</span> package = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">      resolve([package.version, package.update_desc]);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">writeToFile</span>(<span class="params">info</span>) </span>&#123;</span><br><span class="line">  fs.writeFile(<span class="string">&quot;bundles/config.json&quot;</span>, <span class="built_in">JSON</span>.stringify(info), <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> info = <span class="keyword">await</span> readPackageInfo();</span><br><span class="line">  <span class="keyword">let</span> md5 = <span class="keyword">await</span> generateMd5();</span><br><span class="line">  <span class="keyword">const</span> config = &#123;</span><br><span class="line">    create_date: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(),</span><br><span class="line">    version: info[<span class="number">0</span>],</span><br><span class="line">    update_desc: info[<span class="number">1</span>],</span><br><span class="line">    md5: md5,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">await</span> writeToFile(config);</span><br><span class="line">  <span class="keyword">await</span> compressing.zip.compressDir(<span class="string">&quot;bundles&quot;</span>, <span class="string">&quot;base.zip&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<p>生成 <code>base.zip</code> 。这 zip 就可以放到应用分发平台，等待上线。</p>
+<p>源码地址：<a target="_blank" rel="noopener" href="https://github.com/leconio/ReactNativeInPlatform">https://github.com/leconio/ReactNativeInPlatform</a></p>
+
+        </div>
+
+        
+            <div class="article-tags tags">
+                
+            </div>
+        
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2021/03/04/%E8%A7%A3%E5%86%B3%E4%BD%BF%E7%94%A8gopath%E6%97%B6%E5%80%99goget%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="解决使用gopath时候goget慢的问题">
+                                    
+                                        解决使用gopath时候goget慢的问题
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2021/03/04/Android-%E8%AE%BE%E5%A4%87%E9%80%9A%E8%BF%87WIFI%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE-%E7%82%B9%E5%AF%B9%E7%82%B9%E4%BC%A0%E8%BE%93/" rel="prev" title="Android 设备通过WIFI传输数据 - 点对点传输">
+                                    
+                                        Android 设备通过WIFI传输数据 - 点对点传输
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+
+                
+
+                
+
+                
+
+                
+                    
+                        <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;Gitalk评论</h4>
+                        <section id="comments">
+                            <div id="gitalk-container" class="valine_thread">
+                                </i><i class="fa fa-spinner fa-spin fa-fw"></i>
+                            </div>
+                        </section>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
+                        <script>
+                            const gitalk = new Gitalk({
+                                clientID: '267678cbabc5bdf16493',
+                                clientSecret: '1b891dc11d681d87a976c666237de5c7b9bc937a',
+                                repo: 'leconio.github.io',
+                                owner: 'leconio',
+                                admin: ['leconio'],
+                                id: md5(decodeURI(window.location.pathname)),
+                                distractionFreeMode: false
+                            })
+
+                            gitalk.render('gitalk-container')
+                        </script>
+                    
+                
+
+            
+
+        </section>
+    </article>
+
+
+<script>
+    window.subData = {
+        title: 'React Native 拆包总结',
+        tools: true
+    }
+</script>
+<script>
+    gtag('event', 'React Native 拆包总结', {'send_to': 'UA-131265262-1'});
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+
+    
+    
+        <section class='m_widget categories'>
+    <div class='header'><i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    <div class='content'>
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
+                
+            </ul>
+        
+    </div>
+</section>
+
+    
+    
+        
+
+    
+    
+    
+        <section class='m_widget links'>
+    <div class='header'><i class="fa fa-handshake-o fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;友链</div>
+    <div class='content'>
+        <ul class="entry" id="links">
+            
+                <li><a class="flat-box" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/leconio">
+                    <div class='name'>
+                        <!--<i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i>-->
+                        <i class='fa fa-github fa-'></i>
+                        &nbsp;&nbsp;GitHub
+                    </div>
+                </a></li>
+            
+            
+
+        </ul>
+
+    </div>
+</section>
+
+    
+    
+        
+    <section class='m_widget toc-wrapper'>
+        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+        <div class='content'>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%92%E4%BB%A3%E7%A0%81%E6%8B%86%E5%88%86"><span class="toc-text">规划代码拆分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%94%E7%A4%BA"><span class="toc-text">演示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85"><span class="toc-text">打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8C%85"><span class="toc-text">分包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD"><span class="toc-text">后续</span></a></li></ol>
+        </div>
+    </section>
+
+
+    
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <!-- <div class="social-wrapper">
+            粤ICP备18129541号
+        </div> -->
+    <br>
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='//cdn.bootcss.com/node-waves/0.7.5/waves.min.js'></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+
+
+
+<script src="/js/jquery.fitvids.js"></script>
+
+
+    <script>
+        var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+        var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+        var ALGOLIA_API_KEY = "";
+        var ALGOLIA_APP_ID = "";
+        var ALGOLIA_INDEX_NAME = "";
+        var AZURE_SERVICE_NAME = "";
+        var AZURE_INDEX_NAME = "";
+        var AZURE_QUERY_KEY = "";
+        var BAIDU_API_ID = "";
+        var SEARCH_SERVICE = "hexo" || "hexo";
+        var ROOT = "/"||"/";
+        if(!ROOT.endsWith('/'))ROOT += '/';
+    </script>
+
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+    
+    
+    
+
+
+    <script>setLoadingBarProgress(100);</script>
+</body>

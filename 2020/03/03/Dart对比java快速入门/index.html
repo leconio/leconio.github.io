@@ -206,7 +206,9 @@ strings
 * String
 
 booleans
-* bool</code></pre><p>如下代码：</p>
+* bool
+</code></pre>
+<p>如下代码：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// numbers</span></span><br><span class="line">  <span class="built_in">int</span> i = <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">double</span> d = <span class="number">1.1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 字符串转数字</span></span><br><span class="line">  <span class="comment">// 这里就使用了类型推导</span></span><br><span class="line">  <span class="keyword">final</span> p1 = <span class="string">&quot;3&quot;</span>;</span><br><span class="line">  <span class="keyword">final</span> p2 = <span class="string">&quot;3.3&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">int</span>.parse(p1));</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">double</span>.parse(p2));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// string</span></span><br><span class="line">  <span class="comment">// 可以使用（&#x27;xxx&#x27;）（&quot;xxx&quot;）（&#x27;&#x27;&#x27;xxx&#x27;&#x27;&#x27;） 三种方式初始化字符串，和Kotlin很像。</span></span><br><span class="line">  <span class="comment">// 字符串比较的是值</span></span><br><span class="line">  <span class="keyword">final</span> str1 = <span class="string">&quot;test&quot;</span>;</span><br><span class="line">  <span class="keyword">final</span> str2 = <span class="string">&quot;test&quot;</span>;</span><br><span class="line">  <span class="built_in">print</span>(str1 == str2); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> str3 = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">  <span class="built_in">print</span>(str3);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> str4 = <span class="string">&#x27;&#x27;&#x27;test&#x27;&#x27;&#x27;</span>;</span><br><span class="line">  <span class="built_in">print</span>(str4);</span><br><span class="line">  <span class="built_in">print</span>(str4 == str3); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;I&#x27;m <span class="subst">$&#123;str4&#125;</span>!!!&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//booleans</span></span><br><span class="line">  <span class="comment">// null 可以直接用来判断，它是false</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;null is true&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;null is false&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.isEmpty);</span><br><span class="line"><span class="comment">//   final list = [];</span></span><br><span class="line"><span class="comment">//   if(!list) &#123;</span></span><br><span class="line"><span class="comment">//     print(&#x27;not empty&#x27;);</span></span><br><span class="line"><span class="comment">//   &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Dart 的数据结构包括 list 和 map</p>
@@ -343,9 +345,9 @@ booleans
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/06/10/Shadowsocks%20%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B%E5%85%A8%E6%99%AF%E5%AE%9E%E5%BD%95%EF%BC%882%EF%BC%89/" rel="prev" title="Shadowsocks 实战教程全景实录（2）">
+                                <a href="/2019/06/10/%E5%BC%80%E5%90%AFBBR%E6%90%AD%E5%BB%BAss-server/" rel="prev" title="开启BBR搭建ss-server">
                                     
-                                        Shadowsocks 实战教程全景实录（2）
+                                        开启BBR搭建ss-server
                                     
                                 </a>
                             </h4>
@@ -385,6 +387,7 @@ booleans
                         </section>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
                         <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
                         <script>
                             const gitalk = new Gitalk({
                                 clientID: '267678cbabc5bdf16493',
@@ -392,7 +395,7 @@ booleans
                                 repo: 'leconio.github.io',
                                 owner: 'leconio',
                                 admin: ['leconio'],
-                                id: decodeURI(window.location.pathname),
+                                id: md5(decodeURI(window.location.pathname)),
                                 distractionFreeMode: false
                             })
 
@@ -432,7 +435,13 @@ booleans
         
             <ul class="entry">
                 
-                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
                 
                     <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
                 

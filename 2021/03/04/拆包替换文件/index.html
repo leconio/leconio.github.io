@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
     <title>
-      Archives: 2019/3 |  lecon
+      apk 拆包替换文件 |  lecon
     </title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,56 +153,150 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
+            <article id="post-拆包替换文件" class="post white-box article-type-post" itemscope
+         itemprop="blogPost">
+    <section class='meta'>
+        <h1 class="title">
             
-	
-    <script>
-        window.subData= { title:'year : 2019.3'}
-    </script>
-
-
-<section class="post-list">
-    
-    
-        <div class='post-wrapper'>
-            <article class="post reveal ">
-    <section class="meta">
-        <h2 class="title">
-            <a href="/2019/03/08/%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%89%E7%BA%A7%E5%9F%9F%E5%90%8D/">
-                
-                    Godaddy 快速配置三级域名
-                
-            </a>
-        </h2>
+                apk 拆包替换文件
+            
+        </h1>
         <time>
-            2019-03-08
+            2021-03-04&nbsp;&nbsp;
+            <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
         </time>
         
     
     <div class='cats'>
-        <a href="/categories/%E7%8E%A9%E5%84%BF/">玩儿</a>
+        <a href="/categories/Android/">Android</a>
     </div>
 
 
     </section>
 
     <section class="article typo">
-        <p>如何配置快速配置三级域名</p>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>在 Android 的开发测试过程中，为了替换 assets 文件或者更改 smail 文件，需要把 apk 拆开。<span id="more"></span>这个过程用到 apktool 和 jarsigner。其中 apktool 需要自己安装；jarsigner 是 jdk 自带的，也就是说需要 java 开发环境。</p>
+<p>apktool 安装地址：<a target="_blank" rel="noopener" href="https://ibotpeaches.github.io/Apktool/">https://ibotpeaches.github.io/Apktool/</a></p>
+<p>如果你使用 mac 系统，可以使用 homebrew 安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apktool</span><br></pre></td></tr></table></figure>
+
+<p>其他系统参照官方方法：<a target="_blank" rel="noopener" href="https://ibotpeaches.github.io/Apktool/install/">https://ibotpeaches.github.io/Apktool/install/</a></p>
+<p>使用方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">拆包：</span><br><span class="line">apktool d [apk路径]</span><br><span class="line"></span><br><span class="line">封包：</span><br><span class="line">apktool b [拆包产生的文件夹]</span><br></pre></td></tr></table></figure>
+
+<p>拆包使用<code>apktool d </code>指令，执行完成之后生成同名目录，封包使用<code>apktool b</code>指令，此时生成 apk 文件，但是这个 apk 是未签名的。不能对手机上已经安装的 apk 进行替换，下面进行签名。jarsigner 是 jdk 自带，不需要额外安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore [keystore路径] -storepass [密码] -signedjar [输出apk路径] [输入apk路径] [别名]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不同的 apk 签名可能不相同，使用 jarsigner —help 查看使用规则，现在的 jdk 都是兼容中文的，不用担心看不懂。</p>
+</blockquote>
+
+        </div>
+
         
-            <div class="readmore">
-                <a href="/2019/03/08/%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE%E4%B8%89%E7%BA%A7%E5%9F%9F%E5%90%8D/" class="flat-box">READ MORE</a>
+            <div class="article-tags tags">
+                
             </div>
         
 
         
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2021/03/04/Kotlin-%E5%B0%81%E9%97%AD%E7%B1%BB%E4%B8%8E%E6%9E%9A%E4%B8%BE%E5%8C%BA%E5%88%AB/" rel="prev" title="Kotlin 封闭类与枚举区别">
+                                    
+                                        Kotlin 封闭类与枚举区别
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2021/03/03/%E4%BD%BF%E7%94%A8frp%E8%AE%BF%E9%97%AE%E5%85%AC%E5%8F%B8%E5%86%85%E9%83%A8%E7%BD%91%E7%BB%9C/" rel="prev" title="使用frp访问公司内部网络">
+                                    
+                                        使用frp访问公司内部网络
+                                    
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
     </section>
+
 </article>
 
-        </div>
-    
-</section>
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+
+                
+
+                
+
+                
+
+                
+                    
+                        <h4><i class="fa fa-comments fa-fw" aria-hidden="true"></i>&nbsp;Gitalk评论</h4>
+                        <section id="comments">
+                            <div id="gitalk-container" class="valine_thread">
+                                </i><i class="fa fa-spinner fa-spin fa-fw"></i>
+                            </div>
+                        </section>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                        <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
+                        <script>
+                            const gitalk = new Gitalk({
+                                clientID: '267678cbabc5bdf16493',
+                                clientSecret: '1b891dc11d681d87a976c666237de5c7b9bc937a',
+                                repo: 'leconio.github.io',
+                                owner: 'leconio',
+                                admin: ['leconio'],
+                                id: md5(decodeURI(window.location.pathname)),
+                                distractionFreeMode: false
+                            })
+
+                            gitalk.render('gitalk-container')
+                        </script>
+                    
+                
+
+            
+
+        </section>
+    </article>
 
 
-
+<script>
+    window.subData = {
+        title: 'apk 拆包替换文件',
+        tools: true
+    }
+</script>
+<script>
+    gtag('event', 'apk 拆包替换文件', {'send_to': 'UA-131265262-1'});
+</script>
 
 
         </div>
@@ -219,7 +313,13 @@
         
             <ul class="entry">
                 
-                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
                 
                     <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
                 
@@ -309,6 +409,10 @@
 <script src="/js/app.js"></script>
 
 
+
+    
+    
+    
 
 
     <script>setLoadingBarProgress(100);</script>

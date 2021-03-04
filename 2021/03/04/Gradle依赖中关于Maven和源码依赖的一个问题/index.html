@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
     <title>
-      Shadowsocks 实战教程全景实录（1） |  lecon
+      Gradle依赖中关于Maven和源码依赖的一个问题 |  lecon
     </title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -153,22 +153,22 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
-            <article id="post-Shadowsocks 实战教程全景实录（1）" class="post white-box article-type-post" itemscope
+            <article id="post-Gradle依赖中关于Maven和源码依赖的一个问题" class="post white-box article-type-post" itemscope
          itemprop="blogPost">
     <section class='meta'>
         <h1 class="title">
             
-                Shadowsocks 实战教程全景实录（1）
+                Gradle依赖中关于Maven和源码依赖的一个问题
             
         </h1>
         <time>
-            2019-06-08&nbsp;&nbsp;
+            2021-03-04&nbsp;&nbsp;
             <!--<i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>-->
         </time>
         
     
     <div class='cats'>
-        <a href="/categories/%E7%8E%A9%E5%84%BF/">玩儿</a>
+        <a href="/categories/Android/">Android</a>
     </div>
 
 
@@ -177,27 +177,22 @@
     <section class="article typo">
 
         <div class="article-entry" itemprop="articleBody">
-            <blockquote>
-<p>近些日子，很多同事都在说自己的代理又不能用了。有的被封 IP，有的 DNS 污染。万里长城在中美贸易战的的大情况下越来越坚固。秋大论坛也宣布告别，搬瓦工取消 29.9 美金的最低套餐，真是苦了我们这些普通程序员了，我们只想安安静静的学习一下国外程序员的经验。</p>
-</blockquote>
+            <p>不同的依赖方式可以组合使用，但他们组合使用时候坑确实很多</p>
 <span id="more"></span>
 
-<p>首先这篇文章的定位是交给大家，怎么使用自己的 VPS 搭建 Shadowsock 服务器，网上的教程有很多，我自己也探了不少的坑，那么，就说下一我自己的经验。</p>
-<h2 id="VPS-提供商"><a href="#VPS-提供商" class="headerlink" title="VPS 提供商"></a>VPS 提供商</h2><p>我的 VPS 选购的是搬瓦工，由于购买的比较早，每年只需 19.9 美金。现在最低是 49.9 美金，以我对搬瓦工这个尿性的了解，基本不会再恢复 29.9 的价位了。相比其他 VPS 提供商，每年 50 刀的价格也算比较良心的。而且这家提供商的机器真的是稳得一笔呀，很少有丢包的情况，基本日常工作可以满足。测速也可以把带宽跑到慢速，我家是 100Mb 宽带，下载速度在 10+MB/S 左右。</p>
-<blockquote>
-<p>如果你跟着我的主线流程慢慢做，那么你也可以到达这个速度。</p>
-</blockquote>
-<p>如果你和我一样，选择搬瓦工的话，那么在选择机房的时候，要选择 CN2 线路。到中国的延迟只有 160ms 左右（深圳），操作系统选择 Centos7。<br><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2019/06/08/15599964405169.jpg" alt="-w690"></p>
-<blockquote>
-<p>注意，CN2 的线路只有 0.33x 的流量。比如说，如果你的机器是 500GB 每月，那么流量就变成 0.33 的倍数。</p>
-</blockquote>
-<p><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2019/06/08/15599965477559.jpg" alt="-w520"></p>
-<p>操作系统选择 Centos7，其他的系统我也都用过，但是这个是最稳定的，Centos6 也可以，但是软件都比较老，防火墙只能用 iptables。debian 和 ubuntu 在网路持续最大化的时候，可能会将 ss-server 进程杀死。</p>
-<p><strong>关于 bbr</strong><br>我推荐使用 bbr，关于是不是用，我说一个数据你就明白了。在没有使用 bbr 之前，我下载速度最多只有 40kb/s，使用字后可以到 300kb/s。当然，你也可以选择锐速，或者暴力魔改 bbr，我贴出一个切换 bbr 和锐速的链接，大家自己选择。若这里选择了 bbr，并且你也不愿意折腾，那么就不用关注这个链接。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate &quot;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;chiakge&#x2F;Linux-NetSpeed&#x2F;master&#x2F;tcp.sh&quot; &amp;&amp; chmod +x tcp.sh &amp;&amp; .&#x2F;tcp.sh</span><br></pre></td></tr></table></figure>
+<p>Java 的常用的依赖方式通常有三种，即 Maven，jar（aar）包，和源码依赖，不同的依赖方式可以组合使用，但他们组合使用时候坑确实很多，下面我们就讨论集中比较常见的情况，这也是我们开发者在进行多模块开发时候会遇到的问题。</p>
+<p>在进行多模块开发过程中，我们通常把经常需要变动的业务模块使用源码依赖的方式进行依赖，如下所示：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">api project(<span class="string">&quot;:mavenlibrary2&quot;</span>)</span><br><span class="line">implementation project(<span class="string">&quot;:mavenlibrary2&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<p>安装好系统之后，通过 ssh 接入机器。</p>
-<p>（未完待续）<br>下一篇讲述怎么搭建 Shadowsocks-libev 服务器，搭建完成之后，就可以使用 SS 的基本功能了！</p>
+<p>而公共库以及很少变动的模块，通常使用 Maven 方式进行依赖，如下所示：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;io.lecon.app:depdemo:1.0.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>想法是非常好的，但是实际开发过程中，随着代码量的增大就显得不是那么回事儿了。业务模块还好说，都是源码依赖方式，基本上不会出现什么问题。但是在使用 Maven 进行依赖的公共库模块就发生了问题。下面看一种情况：</p>
+<p>业务模块正常依赖这个不用管，但是公共模块中同样很多模块进行开发。这时候我们业务模块使用 Maven 的方式对公共模块进行依赖，那么公共模块的各个子模块之间的依赖方式是什么呢？Maven，源码？这样说你可能不好理解，如下图所示:<br><img src="https://pics-1256269247.cos.ap-guangzhou.myqcloud.com/2021/03/04/16148236172274.jpg"><br>先说答案，<strong>只能使用 Maven 的方式依赖</strong><br>Maven 在进行打包的时候，不会将源码依赖的子功能打包进去，但是会保存依赖信息。如果你确实这么做了的话，也许会遇到这样的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Failed to resolve: AppLibrary:mavenlibrary2:unspecified</span><br></pre></td></tr></table></figure>
+
+<p>在进行公共模块开发时候，可以使用源码的方式进行依赖，但是最后放到业务里面运行的时候，公共模块的所有子模块之间一定要全部使用 Maven 方式进行依赖。</p>
+<p>但是这样就会出现一个问题，不同的模块版本号之间如何保持一致？<br>其实这是一个很严重的问题，不同版本之间开放的 api 很有可能不一样，而这些问题在编译时候不一定会报出来，也就是说在运行时会发生类找不到的问题。所以在要把所有 Maven 依赖的项目的版本号以及依赖顺序要统一管理起来，这个话题下次再说。</p>
 
         </div>
 
@@ -210,28 +205,14 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
-                            <h4>
-                                <a href="/2019/06/10/Shadowsocks%20%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B%E5%85%A8%E6%99%AF%E5%AE%9E%E5%BD%95%EF%BC%882%EF%BC%89/" rel="prev" title="Shadowsocks 实战教程全景实录（2）">
-                                    
-                                        Shadowsocks 实战教程全景实录（2）
-                                    
-                                </a>
-                            </h4>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/06/05/%E7%A0%B4%E8%A7%A3%E5%85%AC%E5%8F%B8Mac%E7%9A%84Wifi%E5%85%B1%E4%BA%AB%E9%99%90%E5%88%B6/" rel="prev" title="破解公司 Mac 电脑的 jamf 限制，让 Mac 可以共享 Wifi">
+                                <a href="/2021/03/04/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E4%BD%BF%E7%94%A8Android%E8%B0%83%E7%94%A8Golang/" rel="prev" title="一步一步使用Android调用Golang">
                                     
-                                        破解公司 Mac 电脑的 jamf 限制，让 Mac 可以共享 Wifi
+                                        一步一步使用Android调用Golang
                                     
                                 </a>
                             </h4>
@@ -271,6 +252,7 @@
                         </section>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
                         <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/md5-js@0.0.3/md5.min.js"></script>
                         <script>
                             const gitalk = new Gitalk({
                                 clientID: '267678cbabc5bdf16493',
@@ -278,7 +260,7 @@
                                 repo: 'leconio.github.io',
                                 owner: 'leconio',
                                 admin: ['leconio'],
-                                id: decodeURI(window.location.pathname),
+                                id: md5(decodeURI(window.location.pathname)),
                                 distractionFreeMode: false
                             })
 
@@ -295,12 +277,12 @@
 
 <script>
     window.subData = {
-        title: 'Shadowsocks 实战教程全景实录（1）',
+        title: 'Gradle依赖中关于Maven和源码依赖的一个问题',
         tools: true
     }
 </script>
 <script>
-    gtag('event', 'Shadowsocks 实战教程全景实录（1）', {'send_to': 'UA-131265262-1'});
+    gtag('event', 'Gradle依赖中关于Maven和源码依赖的一个问题', {'send_to': 'UA-131265262-1'});
 </script>
 
 
@@ -318,7 +300,13 @@
         
             <ul class="entry">
                 
-                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>7</div></a></li>
+                    <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badge'>4</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/Go/"><div class='name'>Go</div><div class='badge'>2</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/ReactNative/"><div class='name'>ReactNative</div><div class='badge'>1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/%E7%8E%A9%E5%84%BF/"><div class='name'>玩儿</div><div class='badge'>5</div></a></li>
                 
                     <li><a class="flat-box" href="/categories/%E9%BB%91%E6%B4%9E/"><div class='name'>黑洞</div><div class='badge'>2</div></a></li>
                 
@@ -357,13 +345,6 @@
     
     
         
-    <section class='m_widget toc-wrapper'>
-        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
-        <div class='content'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS-%E6%8F%90%E4%BE%9B%E5%95%86"><span class="toc-text">VPS 提供商</span></a></li></ol>
-        </div>
-    </section>
-
 
     
 
